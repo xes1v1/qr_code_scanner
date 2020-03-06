@@ -26,7 +26,7 @@ public class QRView:NSObject,FlutterPlatformView {
                 try scanner?.startScanning(resultBlock: { codes in
                     if let codes = codes {
                         for code in codes {
-                            let stringValue = code.stringValue!
+                            let stringValue = code.stringValue
                             self.channel.invokeMethod("onRecognizeQR", arguments: stringValue)
                         }
                     }
@@ -35,7 +35,7 @@ public class QRView:NSObject,FlutterPlatformView {
                 NSLog("Unable to start scanning")
             }
         } else {
-            UIAlertView(title: "Scanning Unavailable", message: "This app does not have permission to access the camera", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "Ok").show()
+            UIAlertView(title: "无法扫描", message: "请打开APP的相机权限", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "Ok").show()
         }
     }
     
