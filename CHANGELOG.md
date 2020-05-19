@@ -1,3 +1,9 @@
+## 1.1.0
+* 使用 zxing 3.3.0 版本 
+* 更新安卓第三方扫描库为 4.1.0
+* 修改 minSdkVersion 为 21
+* 更新 README.md
+
 ## 0.0.13
 * Fix misalignment when QRView doesn't start from the top left (#45)
 * Fix crash on iOS when scanning returns nil (#69, #72)
