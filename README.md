@@ -1,7 +1,24 @@
 # QR Code Scanner
-[![Build Status](https://dev.azure.com/juliuscanute/spring/_apis/build/status/juliuscanute.qr_code_scanner?branchName=master)](https://dev.azure.com/juliuscanute/spring/_build/latest?definitionId=7&branchName=master)
+[![GH Actions](https://github.com/juliuscanute/qr_code_scanner/workflows/dart/badge.svg)](https://github.com/juliuscanute/qr_code_scanner/actions)
 
 A QR code scanner that works on both iOS and Android by natively embedding the platform view within Flutter. The integration with Flutter is seamless, much better than jumping into a native Activity or a ViewController to perform the scan.
+
+## minSdkVersion 为 21 的引入方式
+
+* 引入版本 `1.1.0`
+
+```
+qr_code_scanner:
+  git:
+    url: git://github.com/xes1v1/qr_code_scanner.git
+    ref: 1.1.0
+```
+
+* `AndroidManifest.xml` 配置
+
+``` xml
+<uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
+```
 
 
 ## Screenshots
@@ -126,8 +143,10 @@ controller.resume();
 ```
 
 
+# SDK
+Requires at least SDK 24 (Android 7.0).
 
-# TODO'S:
+# TODOs
 * iOS Native embedding is written to match what is supported in the framework as of the date of publication of this package. It needs to be improved as the framework support improves.
 * In future, options will be provided for default states.
 * Finally, I welcome PR's to make it better :), thanks
@@ -136,3 +155,4 @@ controller.resume();
 * Android: https://github.com/zxing/zxing
 * iOS: https://github.com/mikebuss/MTBBarcodeScanner
 * Special Thanks To: LeonDevLifeLog for his contributions towards improving this package.
+

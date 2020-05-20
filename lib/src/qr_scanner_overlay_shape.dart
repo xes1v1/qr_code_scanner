@@ -3,13 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class QrScannerOverlayShape extends ShapeBorder {
-  final Color borderColor;
-  final double borderWidth;
-  final Color overlayColor;
-  final double borderRadius;
-  final double borderLength;
-  final double cutOutSize;
-
   QrScannerOverlayShape({
     this.borderColor = Colors.red,
     this.borderWidth = 3.0,
@@ -18,15 +11,20 @@ class QrScannerOverlayShape extends ShapeBorder {
     this.borderLength = 40,
     this.cutOutSize = 250,
   }) : assert(
-            cutOutSize != null
-                ? cutOutSize != null
-                    ? borderLength <= cutOutSize / 2 + borderWidth * 2
-                    : true
-                : true,
+            cutOutSize != null ??
+                cutOutSize != null ??
+                borderLength <= cutOutSize / 2 + borderWidth * 2,
             "Border can't be larger than ${cutOutSize / 2 + borderWidth * 2}");
 
+  final Color borderColor;
+  final double borderWidth;
+  final Color overlayColor;
+  final double borderRadius;
+  final double borderLength;
+  final double cutOutSize;
+
   @override
-  EdgeInsetsGeometry get dimensions => const EdgeInsets.all(10.0);
+  EdgeInsetsGeometry get dimensions => const EdgeInsets.all(10);
 
   @override
   Path getInnerPath(Rect rect, {TextDirection textDirection}) {
@@ -87,18 +85,17 @@ class QrScannerOverlayShape extends ShapeBorder {
       ..blendMode = BlendMode.dstOut;
 
     final cutOutRect = Rect.fromLTWH(
-      width / 2 - _cutOutSize / 2 + borderOffset,
-      height / 2 - _cutOutSize / 2 + borderOffset,
+      rect.left + width / 2 - _cutOutSize / 2 + borderOffset,
+      rect.top + height / 2 - _cutOutSize / 2 + borderOffset,
       _cutOutSize - borderOffset * 2,
       _cutOutSize - borderOffset * 2,
-    );
-
-    canvas.saveLayer(
-      rect,
-      backgroundPaint,
     );
 
     canvas
+      ..saveLayer(
+        rect,
+        backgroundPaint,
+      )
       ..drawRect(
         rect,
         backgroundPaint,
